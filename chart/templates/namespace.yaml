@@ -1,0 +1,14 @@
+#helm chart namespaces
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{ include "helm-base-ns.ns" . | quote }}
+  labels:
+    namespaceName: {{ include "helm-base-ns.ns" . | quote }}
+    app.info/environment: {{ .Values.environment | quote }}
+  {{ if .Values.allowedThirdParties -}}
+  annotations:
+    {{ if .Values.allowedThirdParties -}}
+    app.info/allowedThirdParties: {{ .Values.allowedThirdParties | quote -}}
+    {{ end }}
+  {{ end }}
