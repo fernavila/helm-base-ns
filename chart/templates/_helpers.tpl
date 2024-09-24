@@ -1,9 +1,20 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "helm-base-ns.ns" -}}
+{{- define "helm-base-ns.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
+
+{{/*
+Return namespace name.
+*/}}
+{{- define "helm-base-ns.ns" -}}
+{{- if .Values.namespace }}
+{{- .Values.namespace }}
+{{- else }}
+{{- printf "%s%s" (.Values.serviceTier | trunc 1) .Values,environment }}
+{{- end }}
+{{- end }} 
 
 {{/*
 Create a default fully qualified app name.
