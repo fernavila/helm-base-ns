@@ -12,7 +12,7 @@ Return namespace name.
 {{- if .Values.namespace }}
 {{- .Values.namespace }}
 {{- else }}
-{{- printf "%s%s" (.Values.serviceTier | trunc 1) .Values,environment }}
+{{- printf "%s%s" (.Values.serviceTier | trunc 1) .Values.environment }}
 {{- end }}
 {{- end }} 
 
